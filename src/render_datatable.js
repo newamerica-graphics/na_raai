@@ -46,6 +46,7 @@ export function RenderDataTable(
   }
 
   // console.log(columns);
+  // let's create the actual columns we pass to react-table
   columns = columns.map((accessor, i) => {
     // prettier-ignore
     let Header = accessor.split(/_|\W/).map(s=> s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
@@ -55,6 +56,13 @@ export function RenderDataTable(
     if (i > 6) {
       Cell = PassFailCell;
     }
+    let small_width = show_top_only ? 50 : 100;
+    let minWidth = accessor == "Fund Name" ? 125 : small_width;
+    let style = accessor == "Fund Name" ? { "white-space": "unset" } : {};
+    // if (accessor == "Fund Name") {
+    //   console.log("FUND NAME");
+    //   minWidth=
+    // }
     if (accessor == "Leader, Finalist, Other") {
       Cell = StatusCell;
       sortMethod = sort_status_func;
@@ -71,7 +79,7 @@ export function RenderDataTable(
 
     Header = Header.split(" ").map(x => <div>{x}</div>);
 
-    return { accessor, Header, Cell, sortMethod };
+    return { accessor, Header, Cell, sortMethod, minWidth, style };
   });
   // console.log(show_top_only);
   let table = show_top_only ? (
