@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config ./webpack.config.js --env.NODE_ENV=development --mode development",
     "build": "webpack --mode production --env.NODE_ENV=production",
     "deploy": "webpack --mode production --env.NODE_ENV=production --env.deploy && ./deploy.sh $npm_package_name",
-    "gh": "gh-pages public",
+    "gh": "gh-pages -d public",
     "watch": "webpack --watch"
   },
   "author": "",
