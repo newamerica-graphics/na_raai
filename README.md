@@ -1,11 +1,5 @@
 # Boilerplate for Creating Data Viz on newamerica.org
 
-## QUESTIONS
-
-- deps, how to include correctly, d3 and teddy ?
-
-* NOPE ISEE. there's no leader list, so it's just the top 25 from all funds...sorted by...?
-
 ## Setup
 
 Install our [data visualization project generator](https://github.com/newamericafoundation/na-cli): `npm i -g @newamerica/na-cli`. Then run: `na-cli setup YOUR-PROJECT-SLUG -d path/to/install/directory`. That's it!
