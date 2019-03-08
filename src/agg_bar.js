@@ -7,8 +7,8 @@ import {
 import "@newamerica/charts/dist/styles.css";
 
 export function RenderAggregateBar(container, input_data) {
-  console.log("RenderAggregateBar");
-  console.log(input_data);
+  // console.log("RenderAggregateBar");
+  // console.log(input_data);
   // prettier-ignore
   if (!input_data){ return}
 
@@ -16,7 +16,9 @@ export function RenderAggregateBar(container, input_data) {
     <Chart
       maxWidth="100%"
       height={400}
-      renderTooltip={({ datum }) => <div>{JSON.stringify(datum)}</div>}
+      renderTooltip={({ datum }) => (
+        <div>{datum.key.replace("% that", `${datum.value}%`)}</div>
+      )}
     >
       {chartProps => (
         <VerticalGroupedBar

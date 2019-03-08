@@ -22,13 +22,16 @@ export function RenderRegionBar(container, input_data) {
     return row;
   });
   input_data.pop();
-
   // console.log("bar", data);
   let bar_chart = (
     <Chart
       maxWidth="100%"
       height={400}
-      renderTooltip={({ datum }) => <div>{JSON.stringify(datum)}</div>}
+      renderTooltip={({ datum }) => (
+        <div>
+          {datum.key}: {datum.value}%
+        </div>
+      )}
     >
       {chartProps => (
         <VerticalGroupedBar

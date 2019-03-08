@@ -48,7 +48,7 @@ const settings = {
     // console.log("raai_regional_composition_of_top");
     return RenderRegionBar(container, region_data);
   },
-  xxxx_raai_aggregate_scores: container => {
+  raai_aggregate_scores: container => {
     return RenderAggregateBar(container, agg_scores_data);
   }
 };
