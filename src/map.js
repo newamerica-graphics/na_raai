@@ -36,7 +36,14 @@ export function RenderMap(el, all_funds) {
     map.addLayer(point_layer_obj());
     let popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
-    map.on("mousedown", function(e) {
+    // mouseover
+    // map.on("mouseenter", "point", function(e) {
+    //   console.log("e");
+    //   // console.log(e)
+    // });
+    // for click method
+    // map.on("mousedown", function(e) {
+    map.on("mouseenter", "point", function(e) {
       var bbox = [
         [e.point.x - 5, e.point.y - 5],
         [e.point.x + 5, e.point.y + 5]
