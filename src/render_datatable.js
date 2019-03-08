@@ -10,11 +10,13 @@ let PassFailCell = row => {
   );
 };
 let StatusCell = row => {
-  let content = "";
-  content = row.value === "Finalist" ? "🥈" : content;
-  content = row.value === "Leader's List" ? "🥇" : content;
+  // let content = "";
+  // content = row.value === "Finalist" ? "🥈" : content;
+  // content = row.value === "Leader's List" ? "🥇" : content;
+  let content = row.value == "Other Rated Fund" ? "" : row.value;
 
-  return <div style={{ textAlign: "center", fontSize: "2em" }}>{content}</div>;
+  // return <div style={{ textAlign: "center", fontSize: "2em" }}>{content}</div>;
+  return <div>{content}</div>;
 };
 let sort_status_func = (a, b) => {
   if (a === "Finalist" && b == "Leader's List") {
