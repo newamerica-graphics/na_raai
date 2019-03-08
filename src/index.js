@@ -45,10 +45,10 @@ const settings = {
     return RenderMap(container, data);
   },
   raai_regional_composition_of_top: container => {
-    console.log("raai_regional_composition_of_top");
+    // console.log("raai_regional_composition_of_top");
     return RenderRegionBar(container, region_data);
   },
-  raai_aggregate_scores: container => {
+  xxxx_raai_aggregate_scores: container => {
     return RenderAggregateBar(container, agg_scores_data);
   }
 };
@@ -62,7 +62,9 @@ function process_all_funds_data(input_data) {
   return results;
 }
 
-// fetch("endpoint")
+// XXX because i'm not checking which is loaded, the way I've got it
+// this updates when each file loads, but hopefully drive shaft will fix that
+//
 d3.csv(all_funds_data_path)
   // .then(response => response.json())
   .then(_data => {
@@ -91,21 +93,6 @@ d3.csv(agg_data_path).then(_data => {
     .slice(0, -4)
     .reverse();
 
-  // Criteria: "Development 10B - Frontier Markets"
-  // Finalists - % that Scored: "48%"
-  // Leaders - % that scored: "60%"
-  // Rest of Funds - % that scored: "24%"
-  // process data  here
-  // TODODODODODODO
-  // TODODODODODODO
-  // TODODODODODODO
-  // TODODODODODODO
-  // row["Percent of Leaders Funds"] = parseInt(
-  //   row["Percent of Leaders Funds"].slice(0, -1)
-  // );
-  // row["Percent of AUM"] = parseInt(row["Percent of AUM"].slice(0, -1));
-
-  // console.log(agg_scores_data);
   for (let i = 0; i < queue.length; i++) queue[i]();
 });
 

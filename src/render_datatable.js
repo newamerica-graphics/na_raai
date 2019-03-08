@@ -42,6 +42,7 @@ export function RenderDataTable(
   if (show_top_only) {
     data = data.filter(x => x["Leader, Finalist, Other"] != "Other Rated Fund");
     columns = columns.slice(0, 7);
+    // console.log(data.length);
   }
 
   // console.log(columns);
@@ -72,16 +73,23 @@ export function RenderDataTable(
 
     return { accessor, Header, Cell, sortMethod };
   });
-
+  // console.log(show_top_only);
   let table = show_top_only ? (
-    <DataTable data={data} columns={columns} maxRows={50} resizable={false} />
+    <DataTable
+      data={data}
+      columns={columns}
+      resizable={false}
+      paginate={false}
+      showPagination={false}
+      defaultPageSize={data.length}
+    />
   ) : (
     <DataTableWithSearch
       data={data}
       columns={columns}
       showPagination={true}
       resizable={false}
-      maxRows={20}
+      defaultPageSize={25}
     />
   );
   ReactDOM.render(table, container);
