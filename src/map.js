@@ -12,7 +12,7 @@ export function RenderMap(el, all_funds) {
   let geojson = make_geo_json(all_funds);
   // console.log(geojson);
   mapboxgl.accessToken =
-    "pk.eyJ1IjoiemlzY2h3YXJ0eiIsImEiOiJjaWg2Y3hpaGgwYWk5dXFqOWlpbnVrY29nIn0.3TLzBN8lTwMqrtrJf140CQ";
+    "pk.eyJ1IjoibmV3YW1lcmljYW1hcGJveCIsImEiOiJjaXVmdTUzbXcwMGdsMzNwMmRweXN5eG52In0.AXO-coBbL621lzrE14xtEA";
   var map = new mapboxgl.Map({
     container: el,
     // container: "map",
