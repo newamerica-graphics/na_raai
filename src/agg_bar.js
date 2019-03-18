@@ -10,9 +10,9 @@ export function RenderAggregateBar(container, input_data) {
   // console.log("RenderAggregateBar");
   // console.log(input_data);
   // prettier-ignore
-  if (!input_data){ return}
+  if (!input_data){ return }
+
   input_data = input_data.map(x => {
-    console.log(x["Criteria"]);
     x["Criteria"] = abbrev(x["Criteria"]);
     return x;
   });
