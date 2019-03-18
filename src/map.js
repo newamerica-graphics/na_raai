@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
+// import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
 // TODO LOK AT
 // https://github.com/zischwartz/womensmarches/blob/master/src/components/map.js
 

@@ -1,10 +1,14 @@
-import "./index.scss";
-import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
-
 import * as d3 from "d3";
 import { DataTable, DataTableWithSearch } from "@newamerica/data-table";
-import "@newamerica/data-table/dist/styles.css";
-import "react-table/react-table.css";
+
+import "./index.scss";
+// guh try all these in the index like he said?
+// import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
+// // import "react-table/react-table.css";
+// import "../node_modules/react-table/react-table.css";
+// import "../node_modules/@newamerica/data-table/dist/styles.css";
+// import "../node_modules/@newamerica/charts/dist/styles.css";
+// import "../node_modules/@newamerica/components/dist/styles.css";
 
 import { RenderMap } from "./map";
 import { RenderDataTable } from "./render_datatable";

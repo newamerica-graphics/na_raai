@@ -11,6 +11,11 @@ export function RenderAggregateBar(container, input_data) {
   // console.log(input_data);
   // prettier-ignore
   if (!input_data){ return}
+  input_data = input_data.map(x => {
+    console.log(x["Criteria"]);
+    x["Criteria"] = abbrev(x["Criteria"]);
+    return x;
+  });
 
   let bar_chart = (
     <Chart
@@ -36,6 +41,19 @@ export function RenderAggregateBar(container, input_data) {
     </Chart>
   );
   ReactDOM.render(bar_chart, container);
+}
+
+function abbrev(s) {
+  return s
+    .split("-")[0]
+    .replace("Accountability", "Account")
+    .replace("Implementation", "Implem")
+    .replace("Integration", "Integ")
+    .replace("Partnership", "Partn")
+    .replace("Development", "Devel")
+    .replace("Commitment", "Commit")
+    .replace("Organization", "Org")
+    .trim();
 }
 
 /*<HorizontalBar
