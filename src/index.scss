@@ -1,5 +1,11 @@
+@import "../node_modules/@newamerica/charts/dist/styles";
+
 #raai_all_funds_map {
   height: 70vh;
+}
+
+#raai_all_funds_map .mapboxgl-canvas-container.mapboxgl-interactive {
+  cursor: default !important;
 }
 
 // .rt-td div {

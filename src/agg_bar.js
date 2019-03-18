@@ -4,7 +4,7 @@ import {
   HorizontalBar,
   VerticalGroupedBar
 } from "@newamerica/charts";
-import "@newamerica/charts/dist/styles.css";
+// import "@newamerica/charts/dist/styles.css";
 
 export function RenderAggregateBar(container, input_data) {
   // console.log("RenderAggregateBar");

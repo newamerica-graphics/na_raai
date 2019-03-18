@@ -1,11 +1,15 @@
 import { DataTable, DataTableWithSearch } from "@newamerica/data-table";
 
 // helpers
+let pass = `<svg class="passfailcheck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.33 13.75" style="fill: none; stroke: rgb(45, 187, 179); stroke-linecap: square; stroke-width: 4px; width: 15px; height: 15px;"><title>check-mark</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polyline class="check-mark" points="3.53 6.9 7.07 10.26 13.79 3.54"></polyline></g></g></svg>`;
+let fail = `<svg class="passfailcheck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.32" style="fill: none; stroke: rgb(230, 92, 100); stroke-linecap: square; stroke-width: 3px; width: 15px; height: 15px;"><title>x-mark</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><line class="x-mark" x1="3.54" y1="3.54" x2="9.78" y2="9.78"></line><line class="x-mark" x1="9.78" y1="3.54" x2="3.54" y2="9.78"></line></g></g></svg>`;
 
 let PassFailCell = row => {
+  let mu = row.value === "Pass" ? { __html: pass } : { __html: fail };
   return (
     <div style={{ textAlign: "center" }}>
-      {row.value === "Pass" ? "✅" : "❌"}
+      <div dangerouslySetInnerHTML={mu} />
+      {/*{row.value === "Pass" ? "✅" : "❌"}*/}
     </div>
   );
 };

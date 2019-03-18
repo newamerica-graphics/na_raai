@@ -23,6 +23,7 @@ export function RenderMap(el, all_funds) {
     // center: [-99, 40],
     maxBounds: bounds // Sets bounds to prevent repeat/wrap
   });
+  map.addControl(new mapboxgl.NavigationControl());
   // and once it's done, actually load the data
   map.on("load", () => {
     // console.log("load");

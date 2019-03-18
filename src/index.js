@@ -30,6 +30,8 @@ let ALL_FUND_DT_COLUMN_BLACKLIST = ["Region", "latitude", "longitude"];
 
 const settings = {
   raai_top_funds_dt: container => {
+    // console.log("skipping top funds because DEV XXX");
+    // return;
     // console.log(data.columns);
     return RenderDataTable(container, data, true, TOP_FUND_DT_COLUMN_BLACKLIST);
   },
