@@ -1,4 +1,5 @@
 import { DataTable, DataTableWithSearch } from "@newamerica/data-table";
+import { ChartContainer, Title, Source } from "@newamerica/meta";
 
 // helpers
 let pass = `<svg class="passfailcheck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.33 13.75" style="fill: none; stroke: rgb(45, 187, 179); stroke-linecap: square; stroke-width: 4px; width: 15px; height: 15px;"><title>check-mark</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polyline class="check-mark" points="3.53 6.9 7.07 10.26 13.79 3.54"></polyline></g></g></svg>`;
@@ -104,5 +105,6 @@ export function RenderDataTable(
       defaultPageSize={25}
     />
   );
-  ReactDOM.render(table, container);
+  let wrapped_table = <ChartContainer>{table}</ChartContainer>;
+  ReactDOM.render(wrapped_table, container);
 }

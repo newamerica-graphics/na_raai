@@ -5,6 +5,7 @@ import {
   VerticalGroupedBar
 } from "@newamerica/charts";
 // import "@newamerica/charts/dist/styles.css";
+import { ChartContainer, Title, Source } from "@newamerica/meta";
 
 let legend_content = `
 <span style='background-color: rgba(28, 83, 110, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
@@ -29,7 +30,7 @@ export function RenderAggregateBar(container, input_data) {
   });
 
   let bar_chart = (
-    <div>
+    <ChartContainer>
       <Chart
         maxWidth="100%"
         height={400}
@@ -55,7 +56,7 @@ export function RenderAggregateBar(container, input_data) {
         className="legend"
         dangerouslySetInnerHTML={{ __html: legend_content }}
       />
-    </div>
+    </ChartContainer>
   );
   ReactDOM.render(bar_chart, container);
 }

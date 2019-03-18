@@ -32,7 +32,7 @@ export function RenderRegionBar(container, input_data) {
   input_data.pop();
   // console.log("bar", data);
   let bar_chart = (
-    <div>
+    <ChartContainer>
       <Chart
         maxWidth="100%"
         height={400}
@@ -56,7 +56,7 @@ export function RenderRegionBar(container, input_data) {
         className="legend"
         dangerouslySetInnerHTML={{ __html: legend_content }}
       />
-    </div>
+    </ChartContainer>
   );
   ReactDOM.render(bar_chart, container);
 }

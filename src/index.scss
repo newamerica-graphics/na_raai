@@ -7,6 +7,11 @@
 @import "../node_modules/@newamerica/charts/dist/styles.css";
 @import "../node_modules/@newamerica/components/dist/styles.css";
 
+.dv-ChartContainer {
+  background-color: #f5f5f5;
+  padding: 1rem;
+}
+
 #raai_all_funds_map {
   height: 70vh;
 }

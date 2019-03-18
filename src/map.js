@@ -1,5 +1,6 @@
 import mapboxgl from "mapbox-gl";
 // import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
+import { ChartContainer, Title, Source } from "@newamerica/meta";
 
 // simply so you can't scroll infinitely
 var bounds = [
