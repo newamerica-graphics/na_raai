@@ -11,8 +11,28 @@
   height: 70vh;
 }
 
+#raai_all_funds_map #map_legend_el {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+}
+
 #raai_all_funds_map .mapboxgl-canvas-container.mapboxgl-interactive {
   cursor: default !important;
+}
+
+.legend {
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.legend span.name {
+  margin-right: 1em;
 }
 
 // .rt-td div {

@@ -1,16 +1,34 @@
 import mapboxgl from "mapbox-gl";
 // import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
-// TODO LOK AT
-// https://github.com/zischwartz/womensmarches/blob/master/src/components/map.js
 
+// simply so you can't scroll infinitely
 var bounds = [
   [-201.21943658896294, -82.53867022120976], // Southwest coordinates
   [186.5540009109581, 80.0606203667802] // Northeast coordinates
 ];
 
+let legend_content = `
+<span style='background-color: rgba(0, 187, 180, 0.6); width: 12px; height: 12px; display: inline-block; border-radius:10px;'></span>
+<span>Leader's List</span>
+<br/>
+<span style='background-color: rgba(28, 83, 110, 0.6); width: 12px; height: 12px; display: inline-block; border-radius:10px;'></span>
+<span>Finalist</span>
+<br/>
+<span style='background-color: rgba(130, 130, 130, 0.6); width: 12px; height: 12px; display: inline-block; border-radius:10px;'></span>
+<span>Other Rated Fund</span>
+`;
+
 export function RenderMap(el, all_funds) {
   let geojson = make_geo_json(all_funds);
   // console.log(geojson);
+  let map_el = document.createElement("div");
+  map_el.id = "map_el";
+  el.append(map_el);
+  let map_legend_el = document.createElement("div");
+  map_legend_el.id = "map_legend_el";
+  map_legend_el.innerHTML = legend_content;
+  el.append(map_legend_el);
+
   mapboxgl.accessToken =
     "pk.eyJ1IjoibmV3YW1lcmljYW1hcGJveCIsImEiOiJjaXVmdTUzbXcwMGdsMzNwMmRweXN5eG52In0.AXO-coBbL621lzrE14xtEA";
   var map = new mapboxgl.Map({

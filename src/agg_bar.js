@@ -6,6 +6,17 @@ import {
 } from "@newamerica/charts";
 // import "@newamerica/charts/dist/styles.css";
 
+let legend_content = `
+<span style='background-color: rgba(28, 83, 110, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
+<span class="name">Finalists - % that Scored</span>
+
+<span style='background-color: rgba(0, 187, 180, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
+<span class="name">Leaders - % that scored</span>
+
+<span style='background-color: gray; width: 10px; height: 10px; display: inline-block;'></span>
+<span class="name">Rest of Funds - % that scored</span>
+`;
+
 export function RenderAggregateBar(container, input_data) {
   // console.log("RenderAggregateBar");
   // console.log(input_data);
@@ -18,27 +29,33 @@ export function RenderAggregateBar(container, input_data) {
   });
 
   let bar_chart = (
-    <Chart
-      maxWidth="100%"
-      height={400}
-      renderTooltip={({ datum }) => (
-        <div>{datum.key.replace("% that", `${datum.value}%`)}</div>
-      )}
-    >
-      {chartProps => (
-        <VerticalGroupedBar
-          data={input_data}
-          x={d => d["Criteria"]}
-          keys={[
-            "Finalists - % that Scored",
-            "Leaders - % that scored",
-            "Rest of Funds - % that scored"
-          ]}
-          {...chartProps}
-          colors={["#5BA4DA", "#2EBCB3", "gray"]}
-        />
-      )}
-    </Chart>
+    <div>
+      <Chart
+        maxWidth="100%"
+        height={400}
+        renderTooltip={({ datum }) => (
+          <div>{datum.key.replace("% that", `${datum.value}%`)}</div>
+        )}
+      >
+        {chartProps => (
+          <VerticalGroupedBar
+            data={input_data}
+            x={d => d["Criteria"]}
+            keys={[
+              "Finalists - % that Scored",
+              "Leaders - % that scored",
+              "Rest of Funds - % that scored"
+            ]}
+            {...chartProps}
+            colors={["#5BA4DA", "#2EBCB3", "gray"]}
+          />
+        )}
+      </Chart>
+      <div
+        className="legend"
+        dangerouslySetInnerHTML={{ __html: legend_content }}
+      />
+    </div>
   );
   ReactDOM.render(bar_chart, container);
 }
