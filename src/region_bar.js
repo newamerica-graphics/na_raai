@@ -18,7 +18,7 @@ let legend_content = `
 export function RenderRegionBar(container, input_data) {
   // console.log(typeof input_data);
   // prettier-ignore
-  if (!input_data){ return}
+  // if (!input_data){ return}
   // console.log(input_data);
 
   input_data = input_data.map((row, i) => {

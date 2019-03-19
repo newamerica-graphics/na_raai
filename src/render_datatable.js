@@ -42,7 +42,8 @@ export function RenderDataTable(
   show_top_only,
   COLUMN_BLACKLIST
 ) {
-  let columns = data["columns"];
+  // let columns = data["columns"];
+  let columns = Object.keys(data[0]);
   columns = columns.filter(col_name => !COLUMN_BLACKLIST.includes(col_name));
   if (show_top_only) {
     data = data.filter(x => x["Leader, Finalist, Other"] != "Other Rated Fund");

@@ -9,13 +9,13 @@ import { ChartContainer, Title, Source } from "@newamerica/meta";
 
 let legend_content = `
 <span style='background-color: rgba(28, 83, 110, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
-<span class="name">Finalists - % that Scored</span>
+<span class="name">Finalists -  Average Score</span>
 
 <span style='background-color: rgba(0, 187, 180, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
-<span class="name">Leaders - % that scored</span>
+<span class="name">Leaders -  Average Score</span>
 
 <span style='background-color: gray; width: 10px; height: 10px; display: inline-block;'></span>
-<span class="name">Rest of Funds - % that scored</span>
+<span class="name">Rest of Funds -  Average Score</span>
 `;
 
 export function RenderAggregateBar(container, input_data) {
@@ -34,18 +34,23 @@ export function RenderAggregateBar(container, input_data) {
       <Chart
         maxWidth="100%"
         height={400}
-        renderTooltip={({ datum }) => (
-          <div>{datum.key.replace("% that", `${datum.value}%`)}</div>
-        )}
+        renderTooltip={arg => {
+          let { datum } = arg;
+          return (
+            <div style={{ textTransform: "capitalize" }}>
+              {datum.key + " " + datum.value}%
+            </div>
+          );
+        }}
       >
         {chartProps => (
           <VerticalGroupedBar
             data={input_data}
             x={d => d["Criteria"]}
             keys={[
-              "Finalists - % that Scored",
-              "Leaders - % that scored",
-              "Rest of Funds - % that scored"
+              "Finalists - average score",
+              "Leaders - average score",
+              "Rest of Funds - average score"
             ]}
             {...chartProps}
             colors={["#5BA4DA", "#2EBCB3", "gray"]}
@@ -62,8 +67,14 @@ export function RenderAggregateBar(container, input_data) {
 }
 
 function abbrev(s) {
+  // prettier-ignore
+  if (!s) { return s }
   return s
     .split("-")[0]
+    .replace("Total", "Average")
+    .replace("Disclosure", "Discl")
+    .replace("Standards", "Stan")
+    .replace("Intention", "Intent")
     .replace("Accountability", "Account")
     .replace("Implementation", "Implem")
     .replace("Integration", "Integ")
