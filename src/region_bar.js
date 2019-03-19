@@ -5,6 +5,7 @@ import {
   VerticalGroupedBar
 } from "@newamerica/charts";
 // import "@newamerica/charts/dist/styles.css";
+import { ChartContainer, Title, Source } from "@newamerica/meta";
 
 let legend_content = `
 <span style='background-color: rgba(0, 187, 180, 0.6); width: 10px; height: 10px; display: inline-block;'></span>
