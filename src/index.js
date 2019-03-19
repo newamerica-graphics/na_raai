@@ -50,6 +50,7 @@ const settings = {
     );
   },
   raai_all_funds_map: container => {
+    // console.log("render all_funds_map", container);
     return RenderMap(container, process_all_funds_data(data["All Funds Data"]));
   },
   raai_regional_composition_of_top: container => {

@@ -2,6 +2,9 @@ import mapboxgl from "mapbox-gl";
 // import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
 import { ChartContainer, Title, Source } from "@newamerica/meta";
 
+mapboxgl.accessToken =
+  "pk.eyJ1IjoibmV3YW1lcmljYW1hcGJveCIsImEiOiJjaXVmdTUzbXcwMGdsMzNwMmRweXN5eG52In0.AXO-coBbL621lzrE14xtEA";
+
 // simply so you can't scroll infinitely
 var bounds = [
   [-201.21943658896294, -82.53867022120976], // Southwest coordinates
@@ -19,79 +22,103 @@ let legend_content = `
 <span>Other Rated Fund</span>
 `;
 
-export function RenderMap(el, all_funds) {
+export function RenderMap(container, all_funds) {
   let geojson = make_geo_json(all_funds);
-  // console.log(geojson);
-  let map_el = document.createElement("div");
-  map_el.id = "map_el";
-  el.append(map_el);
-  let map_legend_el = document.createElement("div");
-  map_legend_el.id = "map_legend_el";
-  map_legend_el.innerHTML = legend_content;
-  el.append(map_legend_el);
-
-  mapboxgl.accessToken =
-    "pk.eyJ1IjoibmV3YW1lcmljYW1hcGJveCIsImEiOiJjaXVmdTUzbXcwMGdsMzNwMmRweXN5eG52In0.AXO-coBbL621lzrE14xtEA";
-  var map = new mapboxgl.Map({
-    container: map_el,
-    // container: "map",
-    style: "mapbox://styles/mapbox/light-v9",
-    zoom: 1,
-    minZoom: 1,
-    maxZoom: 16,
-    // center: [-99, 40],
-    maxBounds: bounds // Sets bounds to prevent repeat/wrap
-  });
-  map.addControl(new mapboxgl.NavigationControl());
-  // and once it's done, actually load the data
-  map.on("load", () => {
-    // console.log("load");
-    map.addSource("data", {
-      type: "geojson",
-      data: geojson
-      // cluster: true, // https://www.mapbox.com/mapbox-gl-js/example/cluster/
-      // clusterRadius: 25 // default is 50
-    });
-    // console.log("done adding data");
-    map.addLayer(point_layer_obj());
-    let popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
-
-    // mouseover
-    // map.on("mouseenter", "point", function(e) {
-    //   console.log("e");
-    //   // console.log(e)
-    // });
-    // for click method
-    // map.on("mousedown", function(e) {
-    map.on("mouseenter", "point", function(e) {
-      var bbox = [
-        [e.point.x - 5, e.point.y - 5],
-        [e.point.x + 5, e.point.y + 5]
-      ];
-      var features = map.queryRenderedFeatures(bbox, { layers: ["point"] });
-      if (!features.length) {
-        popup.remove();
-        return;
-      }
-      let selected = features[0];
-      // console.log(features[0]);
-      popup
-        .setLngLat(selected.geometry.coordinates)
-        .setHTML(
-          `<strong>${
-            selected["properties"]["Fund Name"]
-          }</strong><br/>AUM: $${selected["properties"][
-            "aum $bn"
-          ].toLocaleString()} Billion <br/>Inception: ${
-            selected["properties"]["inception"]
-          }<br/>Country: ${selected["properties"]["Country"]}`
-        )
-        .addTo(map);
-    }); // end mousedown
-  });
+  let map_comp = <MapComponent geojson={geojson} />;
+  ReactDOM.render(map_comp, container);
 }
 
-export function make_geo_json(all_funds) {
+class MapComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.map_ref = React.createRef();
+    // this.createRef
+  }
+  componentDidMount() {
+    this.setup_map();
+  }
+  setup_map() {
+    var map = new mapboxgl.Map({
+      container: this.map_ref,
+      // container: map_el,
+      // container: "map",
+      style: "mapbox://styles/mapbox/light-v9",
+      zoom: 1,
+      minZoom: 1,
+      maxZoom: 16,
+      // center: [-99, 40],
+      maxBounds: bounds // Sets bounds to prevent repeat/wrap
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+    // and once it's done, actually load the data
+    map.on("load", () => {
+      // console.log("load");
+      map.addSource("data", {
+        type: "geojson",
+        data: this.props.geojson
+        // cluster: true, // https://www.mapbox.com/mapbox-gl-js/example/cluster/
+        // clusterRadius: 25 // default is 50
+      });
+      // console.log("done adding data");
+      map.addLayer(point_layer_obj());
+      let popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+
+      // mouseover
+      // map.on("mouseenter", "point", function(e) {
+      //   console.log("e");
+      //   // console.log(e)
+      // });
+      // for click method
+      // map.on("mousedown", function(e) {
+      map.on("mouseenter", "point", function(e) {
+        var bbox = [
+          [e.point.x - 5, e.point.y - 5],
+          [e.point.x + 5, e.point.y + 5]
+        ];
+        var features = map.queryRenderedFeatures(bbox, { layers: ["point"] });
+        if (!features.length) {
+          popup.remove();
+          return;
+        }
+        let selected = features[0];
+        // console.log(features[0]);
+        popup
+          .setLngLat(selected.geometry.coordinates)
+          .setHTML(
+            `<strong>${
+              selected["properties"]["Fund Name"]
+            }</strong><br/>AUM: $${selected["properties"][
+              "aum $bn"
+            ].toLocaleString()} Billion <br/>Inception: ${
+              selected["properties"]["inception"]
+            }<br/>Country: ${selected["properties"]["Country"]}`
+          )
+          .addTo(map);
+      }); // end mousedown
+    });
+  }
+  render() {
+    return (
+      <ChartContainer>
+        <div
+          id="map_el"
+          ref={el => {
+            this.map_ref = el;
+          }}
+        />
+        <div
+          id="map_legend_el"
+          dangerouslySetInnerHTML={{ __html: legend_content }}
+        />
+      </ChartContainer>
+    );
+  }
+}
+
+function make_geo_json(all_funds) {
   // let marches = require("../../data/marches.json");
   var geojson = { features: [], type: "FeatureCollection" };
   for (let fund of all_funds) {
@@ -101,7 +128,7 @@ export function make_geo_json(all_funds) {
   return geojson;
 }
 
-export function create_feature(lng, lat, properties = {}) {
+function create_feature(lng, lat, properties = {}) {
   return {
     type: "Feature",
     properties: properties,
