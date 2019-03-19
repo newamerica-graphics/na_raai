@@ -33,7 +33,7 @@ export function RenderMap(el, all_funds) {
   mapboxgl.accessToken =
     "pk.eyJ1IjoibmV3YW1lcmljYW1hcGJveCIsImEiOiJjaXVmdTUzbXcwMGdsMzNwMmRweXN5eG52In0.AXO-coBbL621lzrE14xtEA";
   var map = new mapboxgl.Map({
-    container: el,
+    container: map_el,
     // container: "map",
     style: "mapbox://styles/mapbox/light-v9",
     zoom: 1,
