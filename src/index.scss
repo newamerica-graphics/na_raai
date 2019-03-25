@@ -49,6 +49,14 @@
   margin-right: 1em;
 }
 
+// this removes the centering of the first four headers in the datatables
+.rt-thead .rt-tr .rt-th:nth-child(-n + 4) {
+  // color: red;
+  justify-content: flex-start;
+  // display: inline-block;
+  // text-align: left !important;
+}
+
 // grabbed from the end of https://github.com/newamericafoundation/teddy/blob/master/packages/data-table/src/DataTable/DataTable.scss
 // dirty hack because for some reason the sort styles are tied to the resizeable styles
 

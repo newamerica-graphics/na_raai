@@ -65,10 +65,8 @@ export function RenderDataTable(
     let small_width = show_top_only ? 50 : 100;
     let minWidth = accessor == "Fund Name" ? 125 : small_width;
     let style = accessor == "Fund Name" ? { "white-space": "unset" } : {};
-    // if (accessor == "Fund Name") {
-    //   console.log("FUND NAME");
-    //   minWidth=
-    // }
+    // let style = {};
+
     if (accessor == "Leader, Finalist, Other") {
       Cell = StatusCell;
       Header = "Leader, Finalist";
@@ -84,7 +82,7 @@ export function RenderDataTable(
       Header = "$AUM (Billions)";
     }
 
-    Header = Header.split(" ").map(x => <div>{x}</div>);
+    // Header = Header.split(" ").map(x => <div>{x}</div>);
 
     return { accessor, Header, Cell, sortMethod, minWidth, style };
   });
