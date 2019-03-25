@@ -70,7 +70,11 @@ function process_agg_data(input_data) {
   // console.log(input_data);
   return (
     input_data
-      .filter(row => row["Rest of Funds - average score"])
+      .filter(
+        row =>
+          row["Rest of Funds - average score"] &&
+          row["Finalists - average score"]
+      )
       .map(row => {
         row["Finalists - average score"] = parseInt(
           row["Finalists - average score"].slice(0, -1)
