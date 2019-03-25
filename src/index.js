@@ -67,7 +67,6 @@ const settings = {
 // data processing helpers
 //
 function process_agg_data(input_data) {
-  // console.log(input_data);
   return (
     input_data
       .filter(
@@ -76,6 +75,10 @@ function process_agg_data(input_data) {
           row["Finalists - average score"]
       )
       .map(row => {
+        // XXX added this to see if we've already proccessed it, which evidently occurs on page switching in prod
+        if (typeof row["Finalists - average score"] !== "string") {
+          return row;
+        }
         row["Finalists - average score"] = parseInt(
           row["Finalists - average score"].slice(0, -1)
         );
