@@ -93,6 +93,7 @@ export function RenderDataTable(
       data={data}
       columns={columns}
       resizable={false}
+      sortable={true}
       paginate={false}
       showPagination={false}
       defaultPageSize={data.length}
@@ -102,6 +103,7 @@ export function RenderDataTable(
       data={data}
       columns={columns}
       showPagination={true}
+      sortable={true}
       resizable={false}
       defaultPageSize={25}
     />

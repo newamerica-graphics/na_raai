@@ -28,6 +28,19 @@ export function RenderMap(container, all_funds) {
   ReactDOM.render(map_comp, container);
 }
 
+function popup_html(selected) {
+  // console.log(selected);
+  let props = selected["properties"];
+  let res = `<strong>${props["Fund Name"]}</strong><br/>AUM: $${props[
+    "aum $bn"
+  ].toLocaleString()} Billion <br/>`;
+  res += `Inception: ${props["inception"]}<br/>Country: ${
+    props["Country"]
+  }<br/>`;
+  res += `Quintile: ${props["quintile"]}`;
+  return res;
+}
+
 class MapComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -87,15 +100,7 @@ class MapComponent extends React.Component {
         // console.log(features[0]);
         popup
           .setLngLat(selected.geometry.coordinates)
-          .setHTML(
-            `<strong>${
-              selected["properties"]["Fund Name"]
-            }</strong><br/>AUM: $${selected["properties"][
-              "aum $bn"
-            ].toLocaleString()} Billion <br/>Inception: ${
-              selected["properties"]["inception"]
-            }<br/>Country: ${selected["properties"]["Country"]}`
-          )
+          .setHTML(popup_html(selected))
           .addTo(map);
       }); // end mousedown
     });
