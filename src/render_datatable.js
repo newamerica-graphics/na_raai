@@ -71,6 +71,7 @@ export function RenderDataTable(
     // }
     if (accessor == "Leader, Finalist, Other") {
       Cell = StatusCell;
+      Header = "Leader, Finalist";
       sortMethod = sort_status_func;
     }
     if (accessor == "aum date") {
