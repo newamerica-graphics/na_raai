@@ -69,7 +69,7 @@ export function RenderDataTable(
 
     if (accessor == "Leader, Finalist, Other") {
       Cell = StatusCell;
-      Header = "Leader, Finalist";
+      Header = show_top_only ? "Leader, Finalist" : "Leader, Finalist, Other";
       sortMethod = sort_status_func;
     }
     if (accessor == "aum date") {
