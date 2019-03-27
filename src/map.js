@@ -86,6 +86,9 @@ class MapComponent extends React.Component {
       // });
       // for click method
       // map.on("mousedown", function(e) {
+      map.on("mouseleave", "point", function(e) {
+        popup.remove();
+      });
       map.on("mouseenter", "point", function(e) {
         var bbox = [
           [e.point.x - 5, e.point.y - 5],
