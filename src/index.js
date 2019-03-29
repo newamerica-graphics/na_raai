@@ -67,33 +67,43 @@ const settings = {
 // data processing helpers
 //
 function process_agg_data(input_data) {
-  return (
-    input_data
-      .filter(
-        row =>
-          row["Rest of Funds - average score"] &&
-          row["Finalists - average score"]
-      )
-      .map(row => {
-        // XXX added this to see if we've already proccessed it, which evidently occurs on page switching in prod
-        if (typeof row["Finalists - average score"] !== "string") {
-          return row;
-        }
-        row["Finalists - average score"] = parseInt(
-          row["Finalists - average score"].slice(0, -1)
-        );
-        row["Leaders - average score"] = parseInt(
-          row["Leaders - average score"].slice(0, -1)
-        );
-        row["Rest of Funds - average score"] = parseInt(
-          row["Rest of Funds - average score"].slice(0, -1)
-        );
+  return input_data
+    .filter(
+      row =>
+        row["Rest of Funds - average score"] && row["Finalists - average score"]
+    )
+    .map(row => {
+      // XXX added this to see if we've already proccessed it, which evidently occurs on page switching in prod
+      if (typeof row["Finalists - average score"] !== "string") {
         return row;
-      })
-      // .slice(0, -4)
-      .reverse()
-  );
+      }
+      row["Finalists - average score"] = parseInt(
+        row["Finalists - average score"].slice(0, -1)
+      );
+      row["Leaders - average score"] = parseInt(
+        row["Leaders - average score"].slice(0, -1)
+      );
+      row["Rest of Funds - average score"] = parseInt(
+        row["Rest of Funds - average score"].slice(0, -1)
+      );
+      return row;
+    })
+    .sort((a, b) => {
+      [a, b] = [second(a["Criteria"]), second(b["Criteria"])];
+      let r = parseInt(a) - parseInt(b);
+      if (r !== 0) {
+        return r;
+      }
+      let x = a.replace(/[0-9]/g, "").localeCompare(b.replace(/[0-9]/g, ""));
+      return x;
+      // console.log();
+      // return 0;
+    });
+  // .slice(0, -4)
+  // .reverse()
 }
+
+let second = x => x.split(" ")[1];
 
 function process_all_funds_data(input_data) {
   let results = input_data.map(row => {
